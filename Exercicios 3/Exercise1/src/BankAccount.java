@@ -1,3 +1,4 @@
+
 public class BankAccount {
     // bank class, business rules, methods
 
@@ -35,9 +36,20 @@ public class BankAccount {
         return isUsingOverdraft;
     }
 
-    public void setUsingOverdraft(boolean usingOverdraft) {
-        isUsingOverdraft = usingOverdraft;
+    // Bank methods ------------------------------------------------------------
+
+    // deposit method -------------
+    public String deposit(float value) {
+        this.balance += value;
+       return "Deposit completed..     +U$" + value + "\n" +
+                "current balance: U$" + getBalance();
     }
 
-    // Bank methods ------------------------------------------------------------
+    public String withdraw(float value) {
+        this.balance -= value;
+        return "Withdraw completed..   -U$" + value + "\n" +
+                "current balance: U$" + getBalance();
+
+    }
+
 }
