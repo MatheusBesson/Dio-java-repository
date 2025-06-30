@@ -37,6 +37,21 @@ public class Client extends BankAccount {
         return String.format("Client " + getName() + " [overdraft] is: " + " U$" + getOverdraft());
     }
 
+    // pay boleto method
+    public String payBoleto() {
+        if(this.getBalance() >= this.getBoletoValue()){
+            float balance = getBalance();
+            float boletoValue = getBoletoValue();
+            float currentBalance = balance - boletoValue;
+            this.setBoletoValue(0f);
+            this.setBalance(currentBalance);
+            return String.format("Boleto settled..     -U$%s \n " +
+                    "current account balance: U$%s", boletoValue, currentBalance);
+        } else {
+            return "Insufficient balance to complete the transaction. ";
+        }
+    }
+
 
 
     @Override
