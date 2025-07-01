@@ -51,6 +51,15 @@ public class Client extends BankAccount {
             return "Insufficient balance to complete the transaction. ";
         }
     }
+    
+    // verifying if the client account is using overdraft money
+    public boolean isOverdrafting() {
+        if (getOverdraft() < 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
 
 

@@ -8,9 +8,9 @@ public class main {
         System.out.println(client1.getBalanceConsult());
         System.out.println(client1.getOverdraftConsult());
         System.out.println("----------------");
-        //System.out.println(client1.deposit(500));
+        System.out.println(client1.deposit(500));
         System.out.println(client1.getBalanceConsult());
-       // System.out.println(client1.withdraw(323));
+        System.out.println(client1.withdraw(323));
         System.out.println("--------balance--------");
         client1.getBalanceConsult();
         System.out.println(client1.getBalanceConsult());
@@ -18,6 +18,7 @@ public class main {
         System.out.println(client1.toString());
         System.out.println(BankAccount.generateBoleto());
         System.out.println(client1.payBoleto());
+        System.out.println(BankAccount.getBoletoValue());
 
 
 
