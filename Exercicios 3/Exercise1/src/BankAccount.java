@@ -1,3 +1,4 @@
+import java.time.LocalTime;
 
 public class BankAccount {
     // bank class, business rules, methods
@@ -9,6 +10,8 @@ public class BankAccount {
     private static float boletoValue;
 
     private boolean isOverdrafting;
+
+    public LocalTime nowInH = LocalTime.now();
 
 
     public BankAccount(float balance) {
@@ -71,7 +74,7 @@ public class BankAccount {
         float sub;
         float newDraft;
         String string = "";
-        
+
         if (this.balance > 0) {
             if (this.balance >= value) {
                 sub = this.balance - value;
@@ -80,6 +83,7 @@ public class BankAccount {
                         "current account balance: U$" + getBalance() + "\n" +
                         "leftover overdraft: U$" + getOverdraft();
             } else if (this.balance < value) {
+                //use sub to interest --------!!!
                 sub = this.balance - value;
                 setBalance(0);
                 newDraft = this.overdraft - (-sub);
@@ -112,12 +116,13 @@ public class BankAccount {
         return String.format("Boleto price is U$%s ", boletoPriceRound);
     }
 
-    // generating interest boleto
-    /*public String boletoInterest () {
-        if() {
+    // generating interest boleto (Overdraft use)
+    public String boletoInterest() {
+        // use var sub interest
+        if () {
 
         }
-    } */
+    }
 
 
 }
