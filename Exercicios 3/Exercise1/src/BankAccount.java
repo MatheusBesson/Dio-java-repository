@@ -4,15 +4,14 @@ public class BankAccount {
 
     private float balance = 0f;     //saldo
 
-    private float overdraft = 500f; //cheque especial(linha de crédito automatica após saldo negativo);
+    private float overdraft; //cheque especial(linha de crédito automatica após saldo negativo);
 
     private static float boletoValue;
 
     private boolean isUsingOverdraft = false;
 
-    public BankAccount(boolean isUsingOverdraft, float overdraft, float balance) {
+    public BankAccount(boolean isUsingOverdraft, float balance) {
         this.isUsingOverdraft = isUsingOverdraft;
-        this.overdraft = overdraft;
         this.balance = balance;
     }
 

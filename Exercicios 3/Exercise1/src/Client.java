@@ -6,8 +6,8 @@ public class Client extends BankAccount {
     private int age;
 
     // constructor using BankAccount root
-    public Client(boolean isUsingOverdraft, float overdraft, float balance, String name, int age) {
-        super(isUsingOverdraft, overdraft, balance);
+    public Client(boolean isUsingOverdraft, float balance, String name, int age) {
+        super(isUsingOverdraft, balance);
         this.name = name;
         this.age = age;
     }
@@ -27,6 +27,7 @@ public class Client extends BankAccount {
     public void setAge(int age) {
         this.age = age;
     }
+
     // balance print check
     public String getBalanceConsult() {
         return String.format("Client " + getName() + " current [balance] is: " + " U$" + getBalance());
@@ -34,12 +35,21 @@ public class Client extends BankAccount {
 
     // Overdraft print check
     public String getOverdraftConsult() {
-        return String.format("Client " + getName() + " [overdraft] is: " + " U$" + getOverdraft());
+        boolean bool;
+        if (getBalance() < 0) {
+            bool = true;
+        } else {
+            bool = false;
+        }
+
+        return String.format("Client " +
+                getName() + " [overdraft] is: " + " U$" +
+                getOverdraft() + ". \n" + "Is utilizing [overdraft] founds: " + "{{" + bool + "}}" +  ".");
     }
 
     // pay boleto method
     public String payBoleto() {
-        if(this.getBalance() >= this.getBoletoValue()){
+        if (this.getBalance() >= this.getBoletoValue()) {
             float balance = getBalance();
             float boletoValue = getBoletoValue();
             float currentBalance = balance - boletoValue;
@@ -51,7 +61,7 @@ public class Client extends BankAccount {
             return "Insufficient balance to complete the transaction. ";
         }
     }
-    
+
     // verifying if the client account is using overdraft money
     public boolean isOverdrafting() {
         if (getOverdraft() < 0) {
@@ -60,7 +70,6 @@ public class Client extends BankAccount {
             return false;
         }
     }
-
 
 
     @Override

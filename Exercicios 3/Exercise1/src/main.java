@@ -2,7 +2,7 @@ public class main {
     public static void main(String[] args) {
 
         // Client
-        Client client1 = new Client(false, 0, 10, "Jeff", 30);
+        Client client1 = new Client(false, 10, "Jeff", 30);
         System.out.println(client1.toString());
         System.out.println("----------------");
         System.out.println(client1.getBalanceConsult());
@@ -15,10 +15,6 @@ public class main {
         client1.getBalanceConsult();
         System.out.println(client1.getBalanceConsult());
 
-        System.out.println(client1.toString());
-        System.out.println(BankAccount.generateBoleto());
-        System.out.println(client1.payBoleto());
-        System.out.println(BankAccount.getBoletoValue());
 
 
 
