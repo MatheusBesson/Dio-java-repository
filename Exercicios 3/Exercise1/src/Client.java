@@ -2,12 +2,11 @@
 public class Client extends BankAccount {
 
     private String name;
-
     private int age;
 
     // constructor using BankAccount root
-    public Client(boolean isUsingOverdraft, float balance, String name, int age) {
-        super(isUsingOverdraft, balance);
+    public Client( float balance, String name, int age) {
+        super(balance);
         this.name = name;
         this.age = age;
     }
@@ -36,12 +35,13 @@ public class Client extends BankAccount {
     // Overdraft print check
     public String getOverdraftConsult() {
         boolean bool;
+        // verifying if the client account is using overdraft money
         if (getBalance() < 0) {
             bool = true;
         } else {
             bool = false;
         }
-
+        setIsOverdrafting(bool);
         return String.format("Client " +
                 getName() + " [overdraft] is: " + " U$" +
                 getOverdraft() + ". \n" + "Is utilizing [overdraft] founds: " + "{{" + bool + "}}" +  ".");
@@ -55,22 +55,12 @@ public class Client extends BankAccount {
             float currentBalance = balance - boletoValue;
             this.setBoletoValue(0f);
             this.setBalance(currentBalance);
-            return String.format("Boleto settled..     -U$%s \n " +
+            return String.format("Boleto settled..     -U$%s \n" +
                     "current account balance: U$%s", boletoValue, currentBalance);
         } else {
             return "Insufficient balance to complete the transaction. ";
         }
     }
-
-    // verifying if the client account is using overdraft money
-    public boolean isOverdrafting() {
-        if (getOverdraft() < 0) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
 
     @Override
     public String toString() {
@@ -79,7 +69,7 @@ public class Client extends BankAccount {
                 "age: " + getAge() + "\n" +
                 "balance: " + getBalance() + "\n" +
                 "overdraft: " + getOverdraft() + "\n" +
-                "Overdrafting: " + isUsingOverdraft() + "\n" +
+                "Overdrafting: " + isOverdrafting() + "\n" +
                 "-----------------}");
     }
 }

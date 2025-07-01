@@ -2,17 +2,22 @@
 public class BankAccount {
     // bank class, business rules, methods
 
-    private float balance = 0f;     //saldo
+    private float balance;     //saldo
 
     private float overdraft; //cheque especial(linha de crédito automatica após saldo negativo);
 
     private static float boletoValue;
 
-    private boolean isUsingOverdraft = false;
+    private boolean isOverdrafting;
 
-    public BankAccount(boolean isUsingOverdraft, float balance) {
-        this.isUsingOverdraft = isUsingOverdraft;
+
+    public BankAccount(float balance) {
         this.balance = balance;
+        if (this.balance <= 500) {
+            overdraft = 50;
+        } else {
+            overdraft = this.balance / 2;
+        }
     }
 
     //getters and setters ------------------------------------------------------------
@@ -45,9 +50,14 @@ public class BankAccount {
         this.overdraft = overdraft;
     }
 
-    public boolean isUsingOverdraft() {
-        return isUsingOverdraft;
+    public void setIsOverdrafting(boolean isOverdrafting) {
+        this.isOverdrafting = isOverdrafting;
     }
+
+    public boolean isOverdrafting() {
+        return isOverdrafting;
+    }
+
 
     // Bank methods ------------------------------------------------------------
 
@@ -58,10 +68,40 @@ public class BankAccount {
     }
 
     public String withdraw(float value) {
-        this.balance -= value;
-        return "Withdraw completed..   -U$" + value + "\n" +
-                "current account balance: U$" + getBalance();
-
+        float sub;
+        float newDraft;
+        String string = "";
+        
+        if (this.balance > 0) {
+            if (this.balance >= value) {
+                sub = this.balance - value;
+                setBalance(sub);
+                string = "Withdraw completed..   -U$" + sub + "\n" +
+                        "current account balance: U$" + getBalance() + "\n" +
+                        "leftover overdraft: U$" + getOverdraft();
+            } else if (this.balance < value) {
+                sub = this.balance - value;
+                setBalance(0);
+                newDraft = this.overdraft - (-sub);
+                setOverdraft(newDraft);
+                string = "Withdraw completed..   -U$" + value + "\n" +
+                        "[[ATENTION]] Not enough [Balance], [Overdraft] used.. \n" +
+                        "current account balance: U$" + getBalance() + "\n" +
+                        "leftover overdraft: U$" + getOverdraft();
+            }
+        } else if (this.balance <= 0) {
+            if (this.overdraft < value) {
+                string = String.format("[[ERROR]] not enough money to complete this transaction. \n" + "Overdraft money left: %s.", getOverdraft());
+            } else if (this.overdraft >= value) {
+                newDraft = this.overdraft - value;
+                setOverdraft(newDraft);
+                string = "Withdraw completed..   -U$" + value + "\n" +
+                        "[[ATENTION]] Not enough [Balance], [Overdraft] used.. \n" +
+                        "current account balance: U$" + getBalance() + "\n" +
+                        "leftover overdraft: U$" + getOverdraft();
+            }
+        }
+        return string;
     }
 
     // Boleto (brazilian payment method), simulating values
@@ -72,6 +112,12 @@ public class BankAccount {
         return String.format("Boleto price is U$%s ", boletoPriceRound);
     }
 
+    // generating interest boleto
+    /*public String boletoInterest () {
+        if() {
+
+        }
+    } */
 
 
 }
