@@ -90,7 +90,7 @@ public class BankAccount {
                 "current account balance: U$" + getBalance();
     }
 
-    public String withdraw(float value) {
+    public String withdrawal(float value) {
 
         String string = "";
 
