@@ -11,7 +11,12 @@ public class BankAccount {
 
     private boolean isOverdrafting;
 
+    public boolean minStart;
+
+
     public LocalTime nowInH = LocalTime.now();
+    float sub;
+    float newDraft;
 
 
     public BankAccount(float balance) {
@@ -21,9 +26,16 @@ public class BankAccount {
         } else {
             overdraft = this.balance / 2;
         }
+        if (this.balance <= 500) {
+            this.setMinStart(true);
+        } else {
+            this.setMinStart(false);
+        }
     }
 
     //getters and setters ------------------------------------------------------------
+
+
 
     public float getBalance() {
         return balance;
@@ -61,6 +73,14 @@ public class BankAccount {
         return isOverdrafting;
     }
 
+    public boolean isMinStart() {
+        return minStart;
+    }
+
+    public void setMinStart(boolean minStart) {
+        this.minStart = minStart;
+    }
+
 
     // Bank methods ------------------------------------------------------------
 
@@ -71,8 +91,7 @@ public class BankAccount {
     }
 
     public String withdraw(float value) {
-        float sub;
-        float newDraft;
+
         String string = "";
 
         if (this.balance > 0) {
@@ -116,12 +135,26 @@ public class BankAccount {
         return String.format("Boleto price is U$%s ", boletoPriceRound);
     }
 
-    // generating interest boleto (Overdraft use)
-    public String boletoInterest() {
-        // use var sub interest
-        if () {
 
+    // generating interest boleto (Overdraft use)
+    public float boletoInterest(boolean isOverdrafting) {
+        // use var sub interest to 20%
+        String string = "";
+        float boletoInterest = 0f;
+
+        if (minStart) {
+            sub = 50 - getOverdraft();
+        } else {
+            sub = 500 - getOverdraft();
         }
+
+        if (isOverdrafting()) {
+            boletoInterest = sub / 5; // 20% of overdraft money spent
+        } else {
+            string = String.format("Not using overdraft funds. \nOverdraft funds used:");
+            System.out.println(string);
+        }
+        return boletoInterest;
     }
 
 

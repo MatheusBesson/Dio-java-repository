@@ -5,7 +5,7 @@ public class Client extends BankAccount {
     private int age;
 
     // constructor using BankAccount root
-    public Client( float balance, String name, int age) {
+    public Client(float balance, String name, int age) {
         super(balance);
         this.name = name;
         this.age = age;
@@ -44,11 +44,16 @@ public class Client extends BankAccount {
         setIsOverdrafting(bool);
         return String.format("Client " +
                 getName() + " [overdraft] is: " + " U$" +
-                getOverdraft() + ". \n" + "Is utilizing [overdraft] founds: " + "{{" + bool + "}}" +  ".");
+                getOverdraft() + ". \n" + "Is utilizing [overdraft] funds: " + "{{" + bool + "}}" + ".");
     }
 
     // pay boleto method
     public String payBoleto() {
+
+
+        float Interest = 0f;
+        String string = "";
+
         if (this.getBalance() >= this.getBoletoValue()) {
             float balance = getBalance();
             float boletoValue = getBoletoValue();
@@ -57,10 +62,38 @@ public class Client extends BankAccount {
             this.setBalance(currentBalance);
             return String.format("Boleto settled..     -U$%s \n" +
                     "current account balance: U$%s", boletoValue, currentBalance);
+        } else if (this.getBalance() <= 0) {
+            if (this.getBoletoValue() > this.getOverdraft() + 10) {
+                string = String.format("Not enough funds to complete this transaction. \n" +
+                        "Your balance: %s \n" +
+                        "Your overdraft funds left: %s", getBalance(), getOverdraft());
+            } else if (this.getBoletoValue() < this.getOverdraft() + 10) {
+                float overdraft = this.getOverdraft(); // 50
+                float boletoPrice = getBoletoValue(); // 43 sobrou 7 de overdraft
+                setIsOverdrafting(true);
+                float newDraft = (overdraft - boletoPrice);
+                setOverdraft(newDraft);
+                float boletoInterest = boletoInterest(isOverdrafting()); // 8.6
+                //boleto price already paid
+                float finalOverdraft = newDraft - boletoInterest;
+                if (finalOverdraft < overdraft) {
+                    setOverdraft(finalOverdraft);
+                    string = String.format("Boleto settled..     \n -U$%s \n Boleto Interest: -U$%s \n" +
+                            "current account overdraft: U$%s", boletoPrice, boletoInterest, getOverdraft());
+                } else if (finalOverdraft > overdraft + 10) {
+                    string = String.format("Not enough funds to complete this transaction. \n" +
+                            "Your balance: %s \n" +
+                            "Your overdraft funds left: %s", getBalance(), getOverdraft());
+                }
+
+                //boleto price, boletoprice, boletointerest, getoverdraft
+            }
         } else {
-            return "Insufficient balance to complete the transaction. ";
+            string = "Insufficient balance to complete the transaction. ";
         }
+        return string;
     }
+
 
     @Override
     public String toString() {
@@ -70,6 +103,7 @@ public class Client extends BankAccount {
                 "balance: " + getBalance() + "\n" +
                 "overdraft: " + getOverdraft() + "\n" +
                 "Overdrafting: " + isOverdrafting() + "\n" +
+                "min start:" + isMinStart() +
                 "-----------------}");
     }
 }
