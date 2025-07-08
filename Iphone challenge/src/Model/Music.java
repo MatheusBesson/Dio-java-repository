@@ -10,8 +10,6 @@ public final class Music implements Reproductor {
     private String playingNow;
 
     // constructors
-
-
     public Music() {
         this.isPlaying= false;
     }
@@ -48,7 +46,7 @@ public final class Music implements Reproductor {
         if (!trimTitle.equalsIgnoreCase(getTitle())) {
             setTitle(title);
             setPlaying(false);
-            return "\nTitle " + getTitle() + " selected. \n" +
+            return "\nTitle " + getTitle() + " - selected. \n" +
                     "Press play to start listening.\n";
         } else {
             return "This song is already selected.\n";
