@@ -33,6 +33,9 @@ public class Main {
         System.out.println(phone.contactsList());
         System.out.println(phone.call("40028922"));
         System.out.println(phone.decline());
+        System.out.println(phone.sendVoicemail("fodase"));
+        System.out.println(phone.listenToVoicemail());
+
 
 
     }

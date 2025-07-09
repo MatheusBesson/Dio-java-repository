@@ -69,7 +69,7 @@ public class Phone implements PhoneInterface {
         String trimNum = number.trim();
         if (trimNum.equals(getNumber())) {
             setReceivingCall(true);
-            return "You are receiving a call. \n - Awnser   /  - Decline   ";
+            return "You are receiving a call. \n - Awnser   /  - Decline   \n";
         }
         return "Calling to " + trimNum + "\n wait.. \n";
     }
@@ -142,9 +142,9 @@ public class Phone implements PhoneInterface {
     }
 
     @Override
-    public String sendVoicemail(String name) {
-        String trimName = name.trim();
-        return "Voicemail sent to " + trimName;
+    public String sendVoicemail(String msg) {
+        String trimMsg = msg.trim();
+        return "Voicemail '" + trimMsg + "' sent.\n";
     }
 
     @Override
@@ -153,9 +153,9 @@ public class Phone implements PhoneInterface {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                System.out.println("Voicemail ended.");
+                System.out.println("Voicemail ended.\n");
             }
         },10_000);
-        return "You are listening to the voicemail..";
+        return "===[[ You are listening to the voicemail ]]===\n";
     }
 }

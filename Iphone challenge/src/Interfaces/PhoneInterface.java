@@ -11,7 +11,7 @@ public interface PhoneInterface {
     String decline();
     String addContact(Contact contact);
     String removeContact(String name);
-    String sendVoicemail(String name);
+    String sendVoicemail(String msg);
     String listenToVoicemail();
 
 }
