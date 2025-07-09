@@ -36,7 +36,7 @@ public class Page {
     }
 
     public String receiveUrl(){
-        this.url = (getName() + getIp().trim());
+        this.url = "https://" + (getName() + ".com/" + getIp().trim());
         return this.url;
     }
 

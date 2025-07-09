@@ -1,5 +1,7 @@
 import Model.Contact;
+import Model.InternetNavigator;
 import Model.Music;
+import Model.Page;
 import Model.Phone;
 import Model.Video;
 
@@ -33,8 +35,18 @@ public class Main {
         System.out.println(phone.contactsList());
         System.out.println(phone.call("40028922"));
         System.out.println(phone.decline());
-        System.out.println(phone.sendVoicemail("fodase"));
+        System.out.println(phone.sendVoicemail("damn"));
         System.out.println(phone.listenToVoicemail());
+
+        // Internet Navigation interface
+        InternetNavigator internet = new InternetNavigator(true, true );
+        System.out.println(internet);
+        System.out.println(internet.location());
+        System.out.println(internet.newTab(new Page("dogsafe")));
+        System.out.println(internet.getPages().get(0).getUrl());
+        System.out.println(internet.openPage("https://dogsafe.com/113.47.147.157"));
+        System.out.println(internet.sendEmail());
+        System.out.println(internet.refresh());
 
 
 

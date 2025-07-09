@@ -11,5 +11,5 @@ public interface InternetNavInterface {
 
     String location();
 
-    String sendEmail(boolean imap);
+    String sendEmail();
 }

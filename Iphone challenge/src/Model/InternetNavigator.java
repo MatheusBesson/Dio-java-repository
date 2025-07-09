@@ -26,6 +26,7 @@ public class InternetNavigator implements InternetNavInterface {
         } else {
             this.map = "Rest of the world";
         }
+        this.imap = imap;
     }
 
     //getters and setters
@@ -91,11 +92,22 @@ public class InternetNavigator implements InternetNavInterface {
     }
 
     @Override
-    public String sendEmail(boolean imap) {
+    public String sendEmail() {
         if (isImap()) {
             return "Email sent through IMAP.";
         } else {
             return "Email sent through POP3.";
         }
+    }
+
+    @Override
+    public String toString() {
+        return "InternetNavigator{" +
+                "pages=" + pages +
+                ", message='" + message + '\'' +
+                ", location=" + location +
+                ", map='" + map + '\'' +
+                ", imap=" + imap +
+                '}';
     }
 }
