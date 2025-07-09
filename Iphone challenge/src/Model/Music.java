@@ -1,8 +1,8 @@
 package Model;
 
-import Interfaces.Reproductor;
+import Interfaces.Player;
 
-public final class Music implements Reproductor {
+public final class Music implements Player {
 
     // attributes
     private String title;

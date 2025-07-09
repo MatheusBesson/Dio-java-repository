@@ -1,9 +1,6 @@
 package Interfaces;
 
-import Model.Music;
-import Model.Video;
-
-public interface Reproductor{
+public interface Player {
 
     //Methods
     String select(String string);

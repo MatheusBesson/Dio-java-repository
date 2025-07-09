@@ -1,8 +1,8 @@
 package Model;
 
-import Interfaces.Reproductor;
+import Interfaces.Player;
 
-public final class Video implements Reproductor {
+public final class Video implements Player {
 
     // attributes
     private String title;
@@ -49,7 +49,7 @@ public final class Video implements Reproductor {
         if (getTitle() != null) {
             if (!isPlaying()) {
                 setPlaying(true);
-                return getTitle() + " playing..\n";
+                return getTitle() + " - playing..\n";
             } else {
                 return "The video is already playing.\n";
             }
