@@ -16,6 +16,5 @@ public class Main {
         setOfGuests.removeGuestByCode(121112);
         setOfGuests.removeGuestByCode(1111111);
         System.out.println(setOfGuests.showAllGuests());
-
     }
 }
