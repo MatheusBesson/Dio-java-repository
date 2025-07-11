@@ -1,5 +1,6 @@
 
 import Comparable.PeopleOrder;
+import Comparator.NumberOrder;
 
 public class Main {
     public static void main(String[] args) {
@@ -18,6 +19,26 @@ public class Main {
         peopleOrder.orderByHeight();
         System.out.println(peopleOrder.toString());
 
+
+        //-------------- Number ordering challenge ---------------
+
+        NumberOrder numberOrder = new NumberOrder();
+        numberOrder.addNumber(1);
+        numberOrder.addNumber(4);
+        numberOrder.addNumber(2);
+        numberOrder.addNumber(7);
+        numberOrder.addNumber(9);
+        numberOrder.addNumber(3);
+        numberOrder.addNumber(6);
+        numberOrder.addNumber(8);
+        numberOrder.addNumber(5);
+        numberOrder.addNumber(0);
+
+        System.out.println(numberOrder.toString());
+        numberOrder.ascendingOrder();
+        System.out.println(numberOrder.toString());
+        numberOrder.descendingOrder();
+        System.out.println(numberOrder.toString());
 
     }
 }
