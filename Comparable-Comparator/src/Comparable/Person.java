@@ -47,7 +47,6 @@ public class Person implements Comparable<Person> {
         return "----------Person----------\n " +
                 "name: '" + name + "\n" +
                 "age: " + age + "\n" +
-                "height: " + height + "\n" +
-                "-------------------------\n";
+                "height: " + height + "\n";
     }
 }

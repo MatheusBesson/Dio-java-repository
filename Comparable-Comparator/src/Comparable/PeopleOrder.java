@@ -1,11 +1,13 @@
 package Comparable;
 
-import javax.sound.midi.Soundbank;
 import java.util.ArrayList;
 import java.util.Collections;
 
 public class PeopleOrder{
     ArrayList<Person> people = new ArrayList<>();
+
+    public PeopleOrder() {
+    }
 
     public void addPerson(String name, int age, int height)
     {
@@ -24,4 +26,9 @@ public class PeopleOrder{
         people.sort(new ByHeight());
     }
 
+    @Override
+    public String toString() {
+        return "======= People List =======\n" + people +
+                "=========== END ===========";
+    }
 }
