@@ -1,3 +1,5 @@
+package src;
+
 public class Book {
     // attributes
     private String title;
