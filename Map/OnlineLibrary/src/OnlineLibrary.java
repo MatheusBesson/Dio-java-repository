@@ -88,7 +88,7 @@ public class OnlineLibrary {
         return booksByAuthor;
     }
 
-    public Map<String, Book> SearchByAuthor(String author) {
+    public Map<String, Book> searchByAuthor(String author) {
         Map<String, Book> byAuthorBooks = new LinkedHashMap<>();
         for (Map.Entry<String, Book> entry : bookMap.entrySet()) {
             Book book = entry.getValue();

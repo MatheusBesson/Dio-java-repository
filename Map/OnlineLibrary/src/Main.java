@@ -22,6 +22,8 @@ public class Main {
         System.out.println(onlineLibrary.lessExpensiveBook());
         System.out.println(onlineLibrary.getMoreExpensiveBook());
 
+        System.out.println(onlineLibrary.searchByAuthor("Phirlst Onetrovein"));
+
 
 
 
