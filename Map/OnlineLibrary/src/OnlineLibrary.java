@@ -31,6 +31,7 @@ public class OnlineLibrary {
             if (book.getTitle().equalsIgnoreCase(trimTitle)) {
                 bookMap.remove(link);
                 System.out.println("Book removed from the shelf.");
+                break;
             }
         }
     }
@@ -73,15 +74,77 @@ public class OnlineLibrary {
     }
 
     public Map<String, Book> BooksByAuthor() {
-        List<Map.Entry<String, Book>> toOrderByAuthorBooks = new ArrayList<>(bookMap.entrySet());
+        List<Map.Entry<String, Book>> toOrderByAuthor = new ArrayList<>(bookMap.entrySet());
 
-        Collections.sort(toOrderByAuthorBooks, new Comparator<Map.Entry<String, Book>>() {
-            @Override
-            public int compare(Map.Entry<String, Book> o1, Map.Entry<String, Book> o2) {
-                return 0;
+        Collections.sort(toOrderByAuthor, (b1, b2) -> b1.getValue().getAuthor().compareToIgnoreCase(b2.getValue().getAuthor()));
+
+        Map<String, Book> booksByAuthor = new LinkedHashMap<>();
+
+        for (Map.Entry<String, Book> entry : toOrderByAuthor) {
+            String key = entry.getKey();
+            Book bValue = entry.getValue();
+            booksByAuthor.put(key, bValue);
+        }
+        return booksByAuthor;
+    }
+
+    public Map<String, Book> SearchByAuthor(String author) {
+        Map<String, Book> byAuthorBooks = new LinkedHashMap<>();
+        for (Map.Entry<String, Book> entry : bookMap.entrySet()) {
+            Book book = entry.getValue();
+            if (book.getAuthor().equalsIgnoreCase(author)) {
+                byAuthorBooks.put(entry.getKey(), book);
             }
-        });
+        }
+        return byAuthorBooks;
+    }
 
+
+    public List<Book> getMoreExpensiveBook() {
+        List<Book> moreExpensiveBook = new ArrayList<>();
+
+        double maxV = Double.MIN_VALUE;
+
+        for (Book book : bookMap.values()) {
+            if (book.getPrice() > maxV) {
+                maxV = book.getPrice();
+            }
+        }
+
+        for (Map.Entry<String, Book> entry : bookMap.entrySet()) {
+            String key = entry.getKey();
+            Book bValue = entry.getValue();
+
+            if (bValue.getPrice() == maxV) {
+                Book mostExpensiveBook = bookMap.get(key);
+                moreExpensiveBook.add(mostExpensiveBook);
+            }
+        }
+        return moreExpensiveBook;
+    }
+
+    public List<Book> lessExpensiveBook() {
+        List<Book> lessExpensiveBook = new ArrayList<>();
+
+        double minV = Double.MAX_VALUE;
+
+        for (Book book : bookMap.values()) {
+            if (book.getPrice() < minV) {
+                minV = book.getPrice();
+            }
+        }
+
+        for (Map.Entry<String, Book> entry : bookMap.entrySet()) {
+            String key = entry.getKey();
+            Book bValue = entry.getValue();
+            if (bValue.getPrice() == minV) {
+            //    Book lessExBook = bookMap.get(entry.getKey());
+                lessExpensiveBook.add(bValue);
+                System.out.println(bValue);
+            }
+
+        }
+        return lessExpensiveBook;
     }
 
 

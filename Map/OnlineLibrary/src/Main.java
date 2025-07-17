@@ -11,7 +11,16 @@ public class Main {
 
         onlineLibrary.addBook("link3", "The hairless barber", "Phirlst Onetrovein", 10 );
 
-        onlineLibrary.removeBook("The long hair barber");
+        onlineLibrary.addBook("link4", "The hairless barber", "Phirlst Onetrovein", 100 );
+        onlineLibrary.addBook("link5", "The hairless barber", "Phirlst Onetrovein", 200 );
+        onlineLibrary.addBook("link6", "The hairless barber", "Phirlst Onetrovein", 1);
+        onlineLibrary.addBook("link7", "The hairless barber", "Phirlst Onetrovein", 150 );
+
+
+         onlineLibrary.removeBook("The long hair barber");
+
+        System.out.println(onlineLibrary.lessExpensiveBook());
+        System.out.println(onlineLibrary.getMoreExpensiveBook());
 
 
 
