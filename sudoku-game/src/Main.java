@@ -1,7 +1,68 @@
+import Exceptions.ImmutableException;
+
+import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
-        Sudoku sudoku =  new Sudoku();
-        sudoku.spotRulerStarting();
+    private final static Scanner scanner = new Scanner(System.in);
+
+    public static void main(String[] args) throws ImmutableException {
+        boolean menu = true;
+        Sudoku sudoku = new Sudoku(1);
+        while (menu) {
+            System.out.println("===== Select between the options: =====");
+            System.out.println("1 - Start a new game");
+            System.out.println("2 - Make a move");
+            System.out.println("3 - Remove a number");
+            System.out.println("4 - Show board");
+            System.out.println("5 - Clean all moves");
+            System.out.println("6 - Exit the game");
+
+            int option = scanner.nextInt();
+
+            switch (option) {
+                case 1 -> {
+                    Scanner scanner2 = new Scanner(System.in);
+                    System.out.println("Type the sudoku game number (1 for now)");
+                    int gameChoice = scanner2.nextInt();
+                     sudoku.startNewGame(gameChoice);
+                }
+                case 2 -> {
+                    Scanner scanner4 = new Scanner(System.in);
+
+                    System.out.println("Select a number: ");
+                    int number = scanner4.nextInt();
+
+                    System.out.println("Choose the line number: ");
+                    int line = scanner4.nextInt();
+
+                    System.out.println("Choose the colum number: ");
+                    int col = scanner4.nextInt();
+
+                    sudoku.move(number,line,col);
+                }
+                case 3 -> {
+                    //  remove a number
+                }
+                case 4 -> {
+                    sudoku.showBoard();
+                }
+                case 5 -> {
+                    // clean all moves
+                }
+                case 6 -> {
+                    System.exit(0);
+                }
+            }
+        }
+        // in construction ================================!!!!!!!=========================
+        while (!menu) {
+            System.out.println("\n[P to Menu]\n");
+            Scanner scanner3 = new Scanner(System.in);
+            String awnser = scanner3.nextLine();
+            if(awnser.equalsIgnoreCase("p")) {
+                menu = true;
+            }
+            break;
+        }
     }
 }
