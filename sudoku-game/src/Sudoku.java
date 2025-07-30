@@ -1,11 +1,13 @@
 import Exceptions.ImmutableException;
 
 import java.sql.SQLOutput;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Timer;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -17,14 +19,31 @@ class Sudoku {
     private boolean isFinalizable = false;
     ScheduledExecutorService gameTimer;
     TableBoard tableBoard = new TableBoard();
+    int hour;
+    int minutes;
+    int diffTime;
 
     public Sudoku(int game) {
         gameTimer = Executors.newScheduledThreadPool(1);
         System.out.println("======== You have 30 minutes to finish the Sudoku Game ========");
-        gameTimer.scheduleAtFixedRate(() -> System.out.println("Good Luck!\n"), 0, 1800, TimeUnit.SECONDS);
+        gameTimer.schedule(() -> {
+            System.out.println("======= Time is over! =======");
+            System.exit(0);
+        }, 1800, TimeUnit.SECONDS);
+        //1800
+        hour = LocalDateTime.now().getHour();
+        minutes = LocalDateTime.now().getMinute();
+
+        if (minutes + 30 > 59) {
+            diffTime = minutes - 30;
+            System.out.println("You have until " + hour + 1 + ":" + diffTime + " to finish the Sudoku.\n");
+        } else {
+            System.out.printf("You have until %d:%d to finish the Sudoku. \n", hour, minutes + 30);
+        }
 
         if (game == 1) {
             this.game = game;
+
             board[2][1] = 9;
             board[2][2] = 8;
             board[0][0] = 5;
@@ -114,6 +133,7 @@ class Sudoku {
 
     }
 
+
     public void finishSudoku() {
         if (isFinalizable) {
             Scanner scanner = new Scanner(System.in);
@@ -139,6 +159,15 @@ class Sudoku {
     public void startNewGame(int num) {
         gameTimer.shutdown();
         Sudoku sudoku = new Sudoku(num);
+    }
+
+    public void getTimer() {
+        if (minutes + 30 > 59) {
+            System.out.println("You have until " + hour + 1 + ":" + diffTime + " to finish the Sudoku.");
+        } else {
+            int newMinutes = minutes + 30;
+            System.out.println("You have until " + hour + ":" + newMinutes + " to finish the Sudoku.");
+        }
     }
 
     public void showBoard() {
